@@ -2,11 +2,11 @@ function Player(name) {
   this.name = name;
 };
 
-function Game(player) {
+function Scoresheet(player) {
   this.player = player;
 };
 
-Game.prototype.FRAMES = {
+Scoresheet.prototype.FRAMES = {
   'round1'  : [0,0],
   'round2'  : [0,0],
   'round3'  : [0,0],

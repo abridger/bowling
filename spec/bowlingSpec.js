@@ -7,31 +7,31 @@ describe('Player', function() {
 
 });
 
-describe('Game', function(){
+describe('Scoresheet', function(){
 
-  describe('initialising the game', function() {
+  describe('setting up a scoresheet', function() {
 
     beforeEach(function(){
       player = new Player("Angus McTavish");
-      game = new Game(player);
+      scoresheet = new Scoresheet(player);
     });
 
     it('has a player', function() {
-      expect(game.player).toEqual(player);
+      expect(scoresheet.player).toEqual(player);
     });
 
     it('has ten frames', function(){
-      expect(Object.keys(game.FRAMES).length).toEqual(10);
+      expect(Object.keys(scoresheet.FRAMES).length).toEqual(10);
     });
 
     it('the first nine frames must have two scores', function() {
-      for(var key in game.FRAMES) {
-        if (key !== 'round10') expect(game.FRAMES[key].length).toEqual(2);
+      for(var key in scoresheet.FRAMES) {
+        if (key !== 'round10') expect(scoresheet.FRAMES[key].length).toEqual(2);
       };
     });
 
     it('the tenth frame must have three scores', function() {
-      expect(game.FRAMES['round10'].length).toEqual(3);
+      expect(scoresheet.FRAMES['round10'].length).toEqual(3);
     });
 
   });
