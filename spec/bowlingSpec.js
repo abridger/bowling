@@ -9,12 +9,12 @@ describe('Player', function() {
 
 describe('Scoresheet', function(){
 
-  describe('setting up a scoresheet', function() {
+  beforeEach(function(){
+    player = new Player("Angus McTavish");
+    scoresheet = new Scoresheet(player);
+  });
 
-    beforeEach(function(){
-      player = new Player("Angus McTavish");
-      scoresheet = new Scoresheet(player);
-    });
+  describe('setting up a scoresheet', function() {
 
     it('has a player', function() {
       expect(scoresheet.player).toEqual(player);
@@ -24,14 +24,28 @@ describe('Scoresheet', function(){
       expect(Object.keys(scoresheet.FRAMES).length).toEqual(10);
     });
 
-    it('the first nine frames must have two scores', function() {
-      for(var key in scoresheet.FRAMES) {
-        if (key !== 'round10') expect(scoresheet.FRAMES[key].length).toEqual(2);
-      };
+  });
+
+  describe('using the scoresheet', function() {
+    beforeEach(function() {
+      frame = 'frame1';
+      points = 10;
     });
 
-    it('the tenth frame must have three scores', function() {
-      expect(scoresheet.FRAMES['round10'].length).toEqual(3);
+    describe('it should be possible to', function() {
+      it('add scores to a frame', function() {
+        scoresheet.addPoints(frame, points);
+        expect(scoresheet.FRAMES['frame1']).toContain(points)
+      });
+    });
+
+    describe('it should not be possible to', function() {
+      it('add more than two scores to one of the first nine frames', function() {
+        for(var i=1; i < 3; i++) {
+          scoresheet.addPoints(frame, points);
+        }
+        expect(scoresheet.FRAMES['frame1'].length).toEqual(2);
+      });
     });
 
   });
