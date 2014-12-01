@@ -50,7 +50,7 @@ describe('Scoresheet', function(){
         scoresheet2.addPoints(9, 2);
         scoresheet2.addPoints(9, 8);
         scoresheet2.addPoints(9, 6);
-        scoresheet2.sumPoints();
+        scoresheet2.cumulativeTotal();
         expect(scoresheet2.FRAMES[0]['total']).toBe(5);
         expect(scoresheet2.FRAMES[1]['total']).toBe(14);
         expect(scoresheet2.FRAMES[2]['total']).toBe(29);
@@ -62,6 +62,7 @@ describe('Scoresheet', function(){
         expect(scoresheet2.FRAMES[8]['total']).toBe(117);
         expect(scoresheet2.FRAMES[9]['total']).toBe(133);
       });
+
     });
 
   });
@@ -76,7 +77,7 @@ describe('Scoresheet', function(){
       }
     });
       it('add scores to a frame', function() {
-        expect(scoresheet.FRAMES[0]['scores']).toContain(1)
+        expect(scoresheet.FRAMES[0]['scores']).toContain(1);
       });
       it('add three scores to the final frame', function() {
         expect(scoresheet.FRAMES[9]['scores'].length).toEqual(3);
@@ -96,7 +97,5 @@ describe('Scoresheet', function(){
     });
 
   });
-
-
 
 });
