@@ -6,21 +6,21 @@ function Scoresheet(player) {
   this.player = player;
 };
 
-Scoresheet.prototype.FRAMES = {
-  'frame1'  : {'total' : null, 'scores' : []},
-  'frame2'  : {'total' : null, 'scores' : []},
-  'frame3'  : {'total' : null, 'scores' : [8]},
-  'frame4'  : {'total' : null, 'scores' : [8]},
-  'frame5'  : {'total' : null, 'scores' : [8]},
-  'frame6'  : {'total' : null, 'scores' : [8]},
-  'frame7'  : {'total' : null, 'scores' : [8]},
-  'frame8'  : {'total' : null, 'scores' : [8]},
-  'frame9'  : {'total' : null, 'scores' : [8]},
-  'frame10' : {'total' : null, 'scores' : [8  ]}
-};
+Scoresheet.prototype.FRAMES = [
+  {'total' : null, 'scores' : []},
+  {'total' : null, 'scores' : []},
+  {'total' : null, 'scores' : []},
+  {'total' : null, 'scores' : []},
+  {'total' : null, 'scores' : []},
+  {'total' : null, 'scores' : []},
+  {'total' : null, 'scores' : []},
+  {'total' : null, 'scores' : []},
+  {'total' : null, 'scores' : []},
+  {'total' : null, 'scores' : []}
+];
 
 Scoresheet.prototype.addPoints= function(frame, points){
-  if(frame === 'frame10') {
+  if(frame === 9) {
     if(this.FRAMES[frame]['scores'].length < 3)
       this.FRAMES[frame]['scores'].push(points);
   } else {
@@ -30,22 +30,33 @@ Scoresheet.prototype.addPoints= function(frame, points){
 };
 
 Scoresheet.prototype.sumPoints = function(){
-  var accumulator = 0;
+  var cumulativeTotal = 0;
 
   for (var frame in this.FRAMES) {
 
-    var targetFrame = this.FRAMES[frame]
+    var currentFrame = this.FRAMES[frame];
+    var currentFrameIndex = this.FRAMES.indexOf(currentFrame);
+    var nextFrameIndex = currentFrameIndex + 1;
+    var nextFrame = this.FRAMES[nextFrameIndex];
 
-    var sum = targetFrame['scores'].reduce(function(previousValue, currentValue){
-      return previousValue + currentValue;
-    });
+    if (currentFrame['scores'].length !== 0) {
+      var frameTotal = currentFrame['scores'].reduce(function(previousValue, currentValue){
+        return previousValue + currentValue;
+      });
+    };
 
-    targetFrame['total'] = sum;
-    accumulator = accumulator + sum;
+    if (currentFrame !== this.FRAMES[9]) {
+      if (currentFrame['scores'][0] === 10) {
+        var bonus = nextFrame['scores'][0] + nextFrame['scores'][1];
+        frameTotal = frameTotal + bonus;
+      } else if (frameTotal === 10) {
+        var bonus = nextFrame['scores'][0];
+        frameTotal = frameTotal + bonus;
+      };
+    };
 
-    console.log(targetFrame);
-    console.log(accumulator);
+    cumulativeTotal = cumulativeTotal + frameTotal;
+    currentFrame['total'] = cumulativeTotal;
 
-    // Need to include bonuses for strikes and half strikes.
   }
 };
