@@ -36,6 +36,10 @@ Domain
 * One pin knocked over equals one point, unless a strike is scored
 * Strike score = strike + the total value of the next two rolls
 
+Further Development
+-------------------
+* Add web interface
+
 Installation
 ------------
 Download dependencies: `npm install`
