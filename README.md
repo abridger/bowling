@@ -1,6 +1,8 @@
 Bowling Scorecard
 =================
 
+Makers Academy Week 5 Challenge to create an interactive scoresheet for ten-pin bowling.
+
 Task
 ----
 Count and sum the scores of a bowling game for one player in JavaScript.

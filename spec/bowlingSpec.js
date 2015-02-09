@@ -1,21 +1,17 @@
 describe('Player', function() {
-
   it('has a name', function() {
     player = new Player("Angus McTavish");
     expect(player.name).toEqual("Angus McTavish");
   });
-
 });
 
 describe('Scoresheet', function(){
-
   beforeEach(function(){
     player = new Player("Angus McTavish");
     scoresheet = new Scoresheet(player);
   });
 
   describe('setting up a scoresheet', function() {
-
     it('has a player', function() {
       expect(scoresheet.player).toEqual(player);
     });
@@ -23,11 +19,9 @@ describe('Scoresheet', function(){
     it('has ten frames', function(){
       expect(Object.keys(scoresheet.FRAMES).length).toEqual(10);
     });
-
   });
 
   describe('scoring', function() {
-
     describe('it should calculate', function() {
       it('the cumulative score for each frame', function() {
         scoresheet2 = new Scoresheet(player);
@@ -62,23 +56,22 @@ describe('Scoresheet', function(){
         expect(scoresheet2.FRAMES[8]['total']).toBe(117);
         expect(scoresheet2.FRAMES[9]['total']).toBe(133);
       });
-
     });
-
   });
 
   describe('using the scoresheet', function() {
-
     describe('it should be possible to', function() {
-    beforeEach(function() {
-      for(var i=1; i < 4; i++) {
-        scoresheet.addPoints(0, 1);
-        scoresheet.addPoints(9, 10);
-      }
-    });
+      beforeEach(function() {
+        for(var i=1; i < 4; i++) {
+          scoresheet.addPoints(0, 1);
+          scoresheet.addPoints(9, 10);
+        }
+      });
+
       it('add scores to a frame', function() {
         expect(scoresheet.FRAMES[0]['scores']).toContain(1);
       });
+
       it('add three scores to the final frame', function() {
         expect(scoresheet.FRAMES[9]['scores'].length).toEqual(3);
       });
@@ -95,7 +88,5 @@ describe('Scoresheet', function(){
         expect(scoresheet.FRAMES[9]['scores'].length).toEqual(3);
       });
     });
-
   });
-
 });
